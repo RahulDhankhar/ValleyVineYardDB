@@ -42,7 +42,6 @@ CREATE TABLE `Vineyard` (
 );
 
 
-
 CREATE TABLE `GrapeVariety` (
     `GV_Code` INTEGER,
     `Gv_name` VARCHAR(20) NOT NULL,
@@ -86,7 +85,9 @@ CREATE TABLE `Employee` (
     UNIQUE KEY (`SSN`),
     UNIQUE KEY (`Phone`) 
 );
+
 ALTER TABLE `Employee` AUTO_INCREMENT = 1000;
+
 
 CREATE TABLE `Skill` (
     `SkillID` INTEGER,
@@ -106,6 +107,7 @@ CREATE TABLE `Has_skill` (
         ON DELETE CASCADE,
         PRIMARY KEY (EmployeeID, SkillID)
 );
+
 
 CREATE TABLE `Blend` (
     `BlendID` INTEGER,
@@ -155,6 +157,7 @@ CREATE TABLE `Product` (
   FOREIGN KEY (`BottleID`) REFERENCES Bottle(BottleID) ON DELETE CASCADE
 );
 
+
 CREATE TABLE `Customer` (
   `CustomerID` integer AUTO_INCREMENT,
   `Phone` char(10) NOT NULL,
@@ -166,6 +169,7 @@ CREATE TABLE `Customer` (
   UNIQUE KEY (`Phone`),
   UNIQUE KEY (`Email`)
 );
+
 ALTER TABLE `Customer` AUTO_INCREMENT = 10000;
 
 
@@ -177,7 +181,9 @@ CREATE TABLE `Order` (
   PRIMARY KEY (`OrderID`),
   FOREIGN KEY (`CustomerID`) REFERENCES Customer(CustomerID) ON DELETE CASCADE
 );
- ALTER TABLE `Order` AUTO_INCREMENT = 50000;
+
+ALTER TABLE `Order` AUTO_INCREMENT = 50000;
+
 
 CREATE TABLE `OrderLineItem` (
   `ProductID` integer NOT NULL,
@@ -197,13 +203,13 @@ CREATE TABLE `CommercialCustomer` (
 );
 
 
-
 CREATE TABLE `IndividualCustomer` (
   `CustomerID` integer PRIMARY KEY REFERENCES Customer(CustomerID) ON DELETE CASCADE,
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(20) NOT NULL,
   `DOB` date NOT NULL
 );
+
 
 -- insert values in Vineyard table
 INSERT INTO `Vineyard`(`VineyardID`,`Name`,`Size`,`Owner`,`Location`)
@@ -213,6 +219,8 @@ VALUES (1,'Heathers Vineyard','20 Acres', 'Heather Lamb','Pierce,Colorado'),
 (4,'Rockies Vineyard','2 Acres','VVI','Windsor,Colorado'),
 (5,'Redfox','5 Acres','VVI','Windsor,Colorado');
 
+
+
 -- insert values in Grape Variety table
 INSERT INTO `GrapeVariety` (`GV_Code`,`GV_NAME`,`JuiceRatio`)
 VALUES (11,'Cabernet Sauvignon', '50'),
@@ -221,6 +229,8 @@ VALUES (11,'Cabernet Sauvignon', '50'),
 (14,'Pinot noir','20'),
 (15,'Merlot','40'),
 (16,'Sauvignon blanc','60');
+
+
 
 -- insert values in  Vintage Year table
 INSERT INTO `VintageYear` (`VineyardID`,`GV_Code`, `Year`)
@@ -234,22 +244,23 @@ VALUES (1, 11, 1998),
 (4, 16, 2002),
 (5, 14, 2000);
 
--- inaert values in Employee Table
 
+-- inaert values in Employee Table
 INSERT INTO `employee` (`FirstName`, `LastName`, `SSN`, `Phone`, 
 `StreetAddress`,`Zipcode`, `DOB`, `VineyardID`,`GV_Code`)
-VALUES('Stephen','Colbert',831404082,7634764373,'804 Jumper Street',80521,8/9/1980,1,12),
-('Chris','Billings',210998812,7747327864,'609 Cross Road Street',80521,9/8/1990,2,11),
-('Sam','Caroll',575097897,3254762333,'1399 Church Street',80537,2/3/1988,1,13),
-('Aaron','Smith',290782871,9813264783,'673 Elizabeth Road',80537,3/11/1978,3,13),
-('Smantha','Rubert',989377611,9712713263,'129 University Town',80615,2/5/1988,3,14),
-('Helen','Ness',893812761,656381263,'908 Town House',80615,12/1/1985,4,15),
-('Nancy','Ronald',334390503,3826432485,'120 South Shield',80645,6/9/1975,4,16),
-('Jen','Nurse',904426634,6666465445,'893 Nolan Drive',80645,12/1/1960,5,14),
-('Donald','Draper',516235716,6565465555,'478 Moses Street',80610,12/3/1988,1,11),
-('Rose','Helbert',996696325,9898766552,'7894 Park Street',80610,2/11/1990,3,14),
-('Nociano','Cass',556735625,8907947864,'1233 University Road',80650,11/1/1961,4,16),
-('Thomas','Jenson',787297730,9907768655,'129 Prime Street',80650,12/11/1990,1,12);
+VALUES
+('Stephen','Colbert', 831404082, 7634764373, '804 Jumper Street', 80521, '1980-12-6', 1,12),
+('Chris','Billings',210998812,7747327864,'609 Cross Road Street',80521, '1990/12/2', 2,11),
+('Sam','Caroll',575097897,3254762333,'1399 Church Street',80537, '1988/4/14', 1,13),
+('Aaron','Smith',290782871,9813264783,'673 Elizabeth Road',80537, '1978/3/12', 3,13),
+('Smantha','Rubert',989377611,9712713263,'129 University Town',80615,'1985/4/12',3,14),
+('Helen','Ness',893812761,656381263,'908 Town House',80615,'1985/6/7',4,15),
+('Nancy','Ronald',334390503,3826432485,'120 South Shield',80645,'1987/9/5',4,16),
+('Jen','Nurse',904426634,6666465445,'893 Nolan Drive',80645,'1967/4/3',5,14),
+('Donald','Draper',516235716,6565465555,'478 Moses Street',80610,'1988/2/13',1,11),
+('Rose','Helbert',996696325,9898766552,'7894 Park Street',80610,'1990/4/5',3,14),
+('Nociano','Cass',556735625,8907947864,'1233 University Road',80650,'1961/1/11',4,16),
+('Thomas','Jenson',787297730,9907768655,'129 Prime Street',80650,'1990/12/3',1,12);
 
 -- insert values in skill table
 
@@ -279,21 +290,21 @@ VALUES (1000,21),
 
 -- insert values in blend table
 INSERT INTO `blend`(`BlendID`,`GrapeCategory`,`BlendProportion`,`Blend_MadeInYear`,`GV_Code`)
-VALUES (31,'Niagra','50',8/21/2010,11),
-(32,'Diamond','80',12/10/2011,12),
-(33,'Concord','20',11/11/2009,13),
-(34,'Concord','40',12/1/2009,15),
-(35,'Diamond','50',2/12/2011,14),
-(36,'Niagra','60', 12/9/2015,16);
+VALUES (31,'Niagra','50','2010/8/11',11),
+(32,'Diamond','80','2011/10/11',12),
+(33,'Concord','20','2009/8/9',13),
+(34,'Concord','40','2012/3/4',15),
+(35,'Diamond','50','2011/12/3',14),
+(36,'Niagra','60', '2015/6/7',16);
 
 -- insert values in wine table
 INSERT INTO `wine`(`WineID`,`WineName`,`AlcoholPer`,`WineCategory`, `Wine_madeInYear`,`BlendID`)
-VALUES (51,'Carignan','10%','Dry Red', 11/10/2010,31),
-(52,'Auslese','11%','Dry Red',12/5/2012,32),
-(53,'Bardolino','12%','White',7/11/2009,33),
-(54,'Blanc de Blancs','8%','Desert',9/9/2012,34),
-(55,'Blush','5%','White',12/6/2010,35),
-(56,'Cava','9%','Dry Red',1/2/2011,36);
+VALUES (51,'Carignan','10%','Dry Red', '2010/11/10',31),
+(52,'Auslese','11%','Dry Red','2012/12/5',32),
+(53,'Bardolino','12%','White','2009/9/10',33),
+(54,'Blanc de Blancs','8%','Desert','2012/09/09',34),
+(55,'Blush','5%','White','2010/12/3',35),
+(56,'Cava','9%','Dry Red','2011/4/2',36);
 
 -- insert values in bottle table
 INSERT INTO `Bottle`(`BottleId`, `Capacity`, `GlassColor`, `Shape`, `UnitPrice`)
@@ -313,7 +324,7 @@ VALUES (100,'$30', 20, 51, 61),
 (106,'$44', 123,54, 62),
 (107,'$33', 798, 55, 61),
 (108,'$25',100, 56, 63),
-(109,'$32', 1000, 56, 63);
+(109,'$32', 1000, 56,63);
 
 -- insert values in customer table
 
@@ -338,21 +349,21 @@ VALUES
 -- insert values in  order table
 INSERT INTO `order`(`Orderdate`, `PaymentCategory`, `CustomerID` )
 VALUES 
-(6/1/2017, 'Credit Card',10000),
-(12/2/2008, 'Debit Card',10001),
-(11/4/2015, 'Credit Card',10002),
-(12/9/2015, 'Debit Card', 10003),
-(12/9/2013,'Credit Card',10004),
-(12/5/2014, 'Credit Card', 10005),
-(11/3/2014,'Check', 10006),
-(11/6/2018, 'Debit Card',10007),
-(12/5/2018,'Check',10008),
-(10/7/2014,'Credit Card',10009),
-(2/5/2018,'Debit Card',10010),
-(3/4/2014,'Check', 10011),
-(1/11/2015,'Credit Card',10012),
-(11/2/2017, 'Credit Card',10013),
-(12/3/2017,'Credit Card',10014);
+('2017/6/1', 'Credit Card',10000),
+('2008/12/2', 'Debit Card',10001),
+('2015/4/11', 'Credit Card',10002),
+('2009/4/2', 'Debit Card', 10003),
+('2013/12/9','Credit Card',10004),
+('2015/4/7', 'Credit Card', 10005),
+('2014/5/6','Check', 10006),
+('2018/4/5', 'Debit Card',10007),
+('2018/12/5','Check',10008),
+('2014/10/7','Credit Card',10009),
+('2018/2/5','Debit Card',10010),
+('2014/3/4','Check', 10011),
+('2015/1/11','Credit Card',10012),
+('2017/9/7', 'Credit Card',10013),
+('2017/12/4','Credit Card',10014);
 
 -- insert values in order line item table
 INSERT INTO `OrderLineItem`(`ProductID`, `OrderID`,`Quantity`)
@@ -376,18 +387,18 @@ VALUES (100,50000,'20'),
 
 -- insert values in individual customer 
 INSERT INTO `IndividualCustomer`(`CustomerID` , `FirstName`, `LastName`,`DOB` )
-VALUES (1000,'Ashley', 'Newton', 12/3/1975),
-(1001,'Chris', 'Hoss', 11/2/1989),
-(1002, 'Chris', 'Jordan', 4/5/1991),
-(1003,'Samuel', 'Francis', 12/2/1990),
-(1004,'Booby','Lorenzo',11/3/1995),
-(1005,'Frank', 'Lamb',10/4/1990),
-(1006,'John', 'Smith', 3/9/1989),
-(1007,'Tom','Hall',12/11/1990),
-(1008,'Mathew','Morris',3/10/1997),
-(1009,'Gabriel','Pulisic',5/7/1989),
-(1010,'Sayer','Mekret', 11/8/1978),
-(1011,'Josua', 'Suarez',10/9/1977);
+VALUES (1000,'Ashley', 'Newton', '1975/12/4'),
+(1001,'Chris', 'Hoss', '1989/4/5'),
+(1002, 'Chris', 'Jordan', '1991/4/5'),
+(1003,'Samuel', 'Francis', '1990/12/4'),
+(1004,'Booby','Lorenzo','1995/5/12'),
+(1005,'Frank', 'Lamb','1990/12/3'),
+(1006,'John', 'Smith', '1989/9/16'),
+(1007,'Tom','Hall','1990/10/12'),
+(1008,'Mathew','Morris','1997/10/13'),
+(1009,'Gabriel','Pulisic','1989/12/1'),
+(1010,'Sayer','Mekret', '1978/11/30'),
+(1011,'Josua', 'Suarez','1979/11/3');
 
 -- insert values in commercial customer
 INSERT INTO `CommercialCustomer`(`CustomerID`, `Company_name`, `TaxID`)
